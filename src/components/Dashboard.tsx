@@ -52,11 +52,11 @@ const Dashboard: React.FC = () => {
                         <div className="flex items-center justify-between">
                             <div className="flex items-center">
                                 <div className="bg-purple-100/50 backdrop-blur-sm p-3 rounded-lg mr-4">
-                                    <AlertTriangle className="h-8 w-8 text-purple-500" />
+                                    <AlertTriangle className="h-8 w-8 text-red-700" />
                                 </div>
                                 <div>
                                     <h1 className="text-2xl sm:text-3xl font-bold text-white">AI Safety Dashboard</h1>
-                                    <p className="text-black-200 text-sm">Report Your Incidents Here</p>
+                                    <p className="text-white text-sm">Report Your Incidents Here</p>
                                 </div>
                             </div>
                         </div>

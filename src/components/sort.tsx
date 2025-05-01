@@ -12,7 +12,7 @@ interface SortProps {
 const Sort: React.FC<SortProps> = ({ selectedSort, onSortChange }) => {
     return (
         <div className="w-full sm:flex-1">
-            <label htmlFor="sort-order" className="block text-sm font-medium text-gray-500 mb-1.5">
+            <label htmlFor="sort-order" className="block text-sm font-medium text-white mb-1.5">
                 <div className="flex items-center">
                     <ArrowUpDown className="h-4 w-4 mr-1.5 text-purple-300" />
                     Sort by Date
@@ -30,7 +30,7 @@ const Sort: React.FC<SortProps> = ({ selectedSort, onSortChange }) => {
                     ))}
                 </select>
                 <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-gray-400">
-                    <ChevronDown className="w-4 h-4 text-purple-300" />
+
                 </div>
             </div>
         </div>

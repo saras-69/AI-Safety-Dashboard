@@ -25,8 +25,6 @@ const IncidentForm: React.FC<IncidentFormProps> = ({ onSubmit, onCancel }) => {
             ...prev,
             [name]: value
         }));
-
-        // Clear error when user starts typing
         if (errors[name as keyof typeof errors]) {
             setErrors(prev => ({
                 ...prev,
@@ -37,23 +35,18 @@ const IncidentForm: React.FC<IncidentFormProps> = ({ onSubmit, onCancel }) => {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-
-        // Validate form
         const newErrors = {
             title: !formData.title ? 'Title is required' : '',
             description: !formData.description ? 'Description is required' : ''
         };
 
         setErrors(newErrors);
-
-        // Check if there are any errors
         if (Object.values(newErrors).some(error => error)) {
             return;
         }
 
         onSubmit(formData);
 
-        // Reset form
         setFormData({
             title: '',
             description: '',
@@ -62,17 +55,17 @@ const IncidentForm: React.FC<IncidentFormProps> = ({ onSubmit, onCancel }) => {
     };
 
     return (
-        <div className="mb-6 bg-white rounded-lg shadow-md overflow-hidden">
-            <div className="bg-purple-50 p-4 border-b border-purple-100">
-                <h2 className="text-xl font-semibold text-gray-700 flex items-center">
-                    <AlertTriangle className="h-5 w-5 mr-2 text-purple-300" />
+        <div className="mb-6 bg-black/30 backdrop-blur-lg rounded-lg shadow-md overflow-hidden border border-white/40">
+            <div className="bg-purple-500/30 backdrop-blur-md p-4 border-b border-purple-300/30">
+                <h2 className="text-xl font-semibold text-white flex items-center">
+                    <AlertTriangle className="h-5 w-5 mr-2 text-purple-200" />
                     Report New Incident
                 </h2>
             </div>
             <form onSubmit={handleSubmit} className="p-6">
                 <div className="mb-5">
-                    <label htmlFor="title" className="block text-sm font-medium text-gray-600 mb-1">
-                        Title<span className="text-purple-400">*</span>
+                    <label htmlFor="title" className="block text-sm font-medium text-white mb-1">
+                        Title<span className="text-purple-300">*</span>
                     </label>
                     <input
                         type="text"
@@ -80,15 +73,15 @@ const IncidentForm: React.FC<IncidentFormProps> = ({ onSubmit, onCancel }) => {
                         name="title"
                         value={formData.title}
                         onChange={handleChange}
-                        className={`w-full p-2.5 border ${errors.title ? 'border-purple-300' : 'border-slate-200'} rounded-md shadow-sm focus:ring-2 focus:ring-purple-300 focus:border-purple-300 bg-white text-gray-700`}
+                        className={`w-full p-2.5 border ${errors.title ? 'border-purple-300' : 'border-white/30'} rounded-md shadow-sm focus:ring-2 focus:ring-purple-400 focus:border-purple-400 bg-white/30 backdrop-blur-sm text-white placeholder-white/60`}
                         placeholder="Enter incident title"
                     />
-                    {errors.title && <p className="mt-1 text-sm text-purple-500">{errors.title}</p>}
+                    {errors.title && <p className="mt-1 text-sm text-purple-300">{errors.title}</p>}
                 </div>
 
                 <div className="mb-5">
-                    <label htmlFor="description" className="block text-sm font-medium text-gray-600 mb-1">
-                        Description<span className="text-purple-400">*</span>
+                    <label htmlFor="description" className="block text-sm font-medium text-white mb-1">
+                        Description<span className="text-purple-300">*</span>
                     </label>
                     <textarea
                         id="description"
@@ -96,17 +89,17 @@ const IncidentForm: React.FC<IncidentFormProps> = ({ onSubmit, onCancel }) => {
                         value={formData.description}
                         onChange={handleChange}
                         rows={4}
-                        className={`w-full p-2.5 border ${errors.description ? 'border-purple-300' : 'border-slate-200'} rounded-md shadow-sm focus:ring-2 focus:ring-purple-300 focus:border-purple-300 bg-white text-gray-700`}
+                        className={`w-full p-2.5 border ${errors.description ? 'border-purple-300' : 'border-white/30'} rounded-md shadow-sm focus:ring-2 focus:ring-purple-400 focus:border-purple-400 bg-white/30 backdrop-blur-sm text-white placeholder-white/60`}
                         placeholder="Provide detailed description of the incident"
                     />
-                    {errors.description && <p className="mt-1 text-sm text-purple-500">{errors.description}</p>}
+                    {errors.description && <p className="mt-1 text-sm text-purple-300">{errors.description}</p>}
                 </div>
 
                 <div className="mb-6">
-                    <label className="block text-sm font-medium text-gray-600 mb-2">Severity Level</label>
+                    <label className="block text-sm font-medium text-white mb-2">Severity Level</label>
                     <div className="flex flex-wrap gap-6">
                         {(['Low', 'Medium', 'High'] as const).map(level => (
-                            <label key={level} className="relative flex items-center">
+                            <label key={level} className="relative flex items-center group">
                                 <input
                                     type="radio"
                                     name="severity"
@@ -115,22 +108,22 @@ const IncidentForm: React.FC<IncidentFormProps> = ({ onSubmit, onCancel }) => {
                                     onChange={handleChange}
                                     className="sr-only"
                                 />
-                                <div className={`w-5 h-5 mr-2 border rounded-full flex items-center justify-center ${formData.severity === level
+                                <div className={`w-5 h-5 mr-2 border rounded-full flex items-center justify-center transition-colors ${formData.severity === level
                                     ? level === 'High'
-                                        ? 'bg-red-400 border-red-400'
+                                        ? 'bg-red-500 border-red-500'
                                         : level === 'Medium'
-                                            ? 'bg-yellow-400 border-yellow-400'
-                                            : 'bg-green-400 border-green-400'
-                                    : 'bg-white border-slate-200'
+                                            ? 'bg-yellow-500 border-yellow-500'
+                                            : 'bg-green-500 border-green-500'
+                                    : 'bg-white/30 backdrop-blur-sm border-white/50 group-hover:bg-white/40'
                                     }`}
                                 >
                                     {formData.severity === level && (
                                         <Check className="w-3 h-3 text-white" />
                                     )}
                                 </div>
-                                <span className={`font-medium ${level === 'High' ? 'text-red-700' :
-                                    level === 'Medium' ? 'text-yellow-700' :
-                                        'text-green-700'
+                                <span className={`font-medium ${level === 'High' ? 'text-red-200' :
+                                    level === 'Medium' ? 'text-yellow-200' :
+                                        'text-green-200'
                                     }`}>
                                     {level}
                                 </span>
@@ -143,14 +136,14 @@ const IncidentForm: React.FC<IncidentFormProps> = ({ onSubmit, onCancel }) => {
                     <button
                         type="button"
                         onClick={onCancel}
-                        className="px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 transition-colors flex items-center justify-center gap-2 order-2 sm:order-1"
+                        className="px-4 py-2 bg-black/20 backdrop-blur-sm text-white rounded-md hover:bg-white/30 transition-colors flex items-center justify-center gap-2 order-2 sm:order-1"
                     >
                         <X className="h-4 w-4" />
                         Cancel
                     </button>
                     <button
                         type="submit"
-                        className="px-4 py-2 bg-purple-400 text-white rounded-md hover:bg-purple-500 transition-colors flex items-center justify-center gap-2 order-1 sm:order-2"
+                        className="px-4 py-2 bg-purple-500/70 backdrop-blur-sm text-white rounded-md hover:bg-purple-600/80 transition-colors flex items-center justify-center gap-2 order-1 sm:order-2"
                     >
                         <Check className="h-4 w-4" />
                         Submit Report

@@ -12,7 +12,7 @@ interface FilterControlsProps {
 const FilterControls: React.FC<FilterControlsProps> = ({ selectedSeverity, onSeverityChange }) => {
     return (
         <div className="w-full">
-            <label htmlFor="severity-filter" className="block text-sm font-medium text-gray-500 mb-1.5">
+            <label htmlFor="severity-filter" className="block text-sm font-medium text-white mb-1.5">
                 <div className="flex items-center">
                     <Filter className="h-4 w-4 mr-1.5 text-purple-300" />
                     Filter

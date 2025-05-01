@@ -8,7 +8,6 @@ const useIncidents = () => {
     const [sortOrder, setSortOrder] = useState<SortOrder>('Newest First');
     const [expandedIncident, setExpandedIncident] = useState<number | null>(null);
 
-    // Load mock data on initial render
     useEffect(() => {
         setIncidents(mockData.map(incident => ({
             ...incident,

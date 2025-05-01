@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowUpDown, ChevronDown } from 'lucide-react';
+import { ArrowUpDown } from 'lucide-react';
 import { SortOrder } from '../types';
 
 const sortOptions = ['Newest First', 'Oldest First'] as const;
